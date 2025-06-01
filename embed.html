@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embeddr Embed</title>
+    <title>Loading Screen</title>
     <link rel="icon" type="image/x-icon" href="/favicon.png">
+<link rel="stylesheet" href="https://us5.pages.dev/storage/css/static-embed.css">
     <style>
         * {
             margin: 0;
@@ -298,24 +299,19 @@
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
+
+<script src="/storage/js/particles.js"></script>
+<script src="/storage/js/apps.js"></script>
+<div id="particles-js"></div>
     
-    <div id="loading-container" class="loading-container">
-        <div class="loading-content">
-            <div class="powered-by">Embed powered by</div>
-            <img src="logo.png" alt="Embeddr Logo" class="embeddr-logo">
-            <h2>Initializing UV Proxy...</h2>
-            <p>Setting up secure connection</p>
-        </div>
-    </div>
+<div id="loadingScreen">
+    <div class="spinner"></div>
+</div>
     
     <div id="error-container" class="error-container" style="display: none;">
         <div class="error-content">
             <h1>❌ Error</h1>
             <p id="error-message">Something went wrong</p>
-            <div class="url-example">
-                Usage: /embed#https://example.com
-            </div>
         </div>
     </div>
     
@@ -328,75 +324,6 @@
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
     <script type="module">
-        // Initialize particles.js with same config as index.html
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#000000'
-                },
-                shape: {
-                    type: 'circle'
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false
-                },
-                size: {
-                    value: 3,
-                    random: true
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#000000',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-
         import { registerSW } from "/prxy/register-sw.mjs";
         import * as BareMux from "/prxy/baremux/index.mjs";
 
@@ -516,7 +443,7 @@
                 };
 
                 // Set the iframe source to the proxied URL
-                iframe.src = proxiedUrl;
+                window.location.href = proxiedUrl;
 
             } catch (error) {
                 console.error("Error setting up proxy:", error);
